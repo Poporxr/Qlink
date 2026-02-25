@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QLINK - Motorcycles, Solar & Home Appliances</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Rajdhani', 'system-ui', 'sans-serif'],
+            body: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              500: '#ef4444',
+              600: '#dc2626',
+            }
+          },
+          boxShadow: {
+            glass: '0 18px 55px rgba(0,0,0,0.65)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --nav-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #020617;
+      color: #e5e7eb;
+    }
+
+    img,
+    svg,
+    video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(248, 113, 113, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.16), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(239, 68, 68, 0.35), transparent 60%),
+        #020617;
+    }
+
+    .glass-panel {
+      background: linear-gradient(125deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.6));
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
+    }
+
+    .glass-soft {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.4));
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .bg-grid {
+      background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.2) 1px, transparent 0);
+      background-size: 30px 30px;
+    }
+
+    .nav-blur {
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+  </style>
+</head>
+<body class="min-h-full bg-slate-950 text-slate-50 overflow-x-hidden">
+  <!-- HEADER / NAV -->
+  <header class="fixed inset-x-0 top-0 z-40 border-b border-slate-800 bg-slate-950/90 nav-blur">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[var(--nav-height)] flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="h-8 w-8 rounded-2xl bg-slate-900 flex items-center justify-center border border-brand-600/70">
+          <span class="font-heading text-lg font-bold tracking-[0.18em]">Q</span>
+        </div>
+        <div class="flex flex-col leading-none">
+          <span class="font-heading text-base sm:text-lg font-semibold tracking-[0.3em] uppercase">
+            QLINK
+          </span>
+          <span class="text-[0.6rem] text-slate-400 tracking-[0.2em] uppercase">
+            Mobility & Power
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-7 text-[0.7rem] font-semibold tracking-[0.2em] uppercase">
+        <a href="index.html" class="text-slate-200 hover:text-brand-500">Home</a>
+        <a href="inventory.html" class="text-slate-300 hover:text-brand-500">Motorcycles</a>
+        <a href="solar.html" class="text-slate-300 hover:text-brand-500">Solar</a>
+        <a href="appliances.html" class="text-slate-300 hover:text-brand-500">Appliances</a>
+        <a href="news.html" class="text-slate-300 hover:text-brand-500">News</a>
+        <a href="dealers.html" class="text-slate-300 hover:text-brand-500">Dealers</a>
+        <a href="contact.html" class="text-slate-300 hover:text-brand-500">Contact</a>
+      </div>
+
+      <!-- Desktop CTA -->
+      <div class="hidden md:block">
+        <a href="dealers.html"
+           class="inline-flex items-center rounded-full bg-gradient-to-r from-brand-500 to-rose-500 px-5 py-2.5 text-[0.7rem] font-semibold tracking-[0.2em] uppercase shadow-glass">
+          Find Dealer
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-nav-toggle"
+              class="md:hidden inline-flex items-center justify-center rounded-full border border-slate-700 p-2 text-slate-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-800 bg-slate-950/95 nav-blur">
+      <div class="max-w-7xl mx-auto px-4 py-4 space-y-2 text-[0.78rem] font-semibold tracking-[0.22em] uppercase">
+        <a href="index.html" class="block text-slate-200">Home</a>
+        <a href="inventory.html" class="block text-slate-300">Motorcycles</a>
+        <a href="solar.html" class="block text-slate-300">Solar & Energy</a>
+        <a href="appliances.html" class="block text-slate-300">Home Appliances</a>
+        <a href="news.html" class="block text-slate-300">News</a>
+        <a href="dealers.html" class="block text-slate-300">Dealers</a>
+        <a href="contact.html" class="block text-slate-300">Contact</a>
+      </div>
+    </div>
+  </header>
+
+<main class="pt-[var(--nav-height)] bg-slate-950">
+  <!-- Page Hero -->
+  <section class="border-b border-slate-900 hero-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div class="max-w-3xl">
+        <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-2">
+          Home Appliances
+        </p>
+        <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-50">
+          Everyday comfort,
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-rose-400">
+            designed for local power.
+          </span>
+        </h1>
+        <p class="mt-3 text-[0.9rem] text-slate-300 max-w-xl">
+          TVs, fans, stabilizers and more - tuned to handle low voltage, sudden outages,
+          and frequent use in African homes and businesses.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7">
+
+        <!-- Smart TV -->
+        <article class="glass-soft rounded-[1.4rem] border border-slate-800 p-5 flex flex-col gap-3">
+          <h2 class="font-heading text-lg font-semibold tracking-tight text-slate-50">
+            QL Smart TVs
+          </h2>
+          <p class="text-[0.85rem] text-slate-300">
+            LED and smart TVs that stay stable on low voltage and work smoothly with inverters
+            and solar backup.
+          </p>
+          <ul class="mt-1 text-[0.8rem] text-slate-300 space-y-1.5">
+            <li>- Sizes from 24" to 55"</li>
+            <li>- Energy-saving backlight design</li>
+            <li>- Optimized for weak signal and noisy power</li>
+          </ul>
+        </article>
+
+        <!-- Fans -->
+        <article class="glass-soft rounded-[1.4rem] border border-slate-800 p-5 flex flex-col gap-3">
+          <h2 class="font-heading text-lg font-semibold tracking-tight text-slate-50">
+            Standing & Rechargeable Fans
+          </h2>
+          <p class="text-[0.85rem] text-slate-300">
+            High-airflow fans for day and night use, with rechargeable options for when power drops.
+          </p>
+          <ul class="mt-1 text-[0.8rem] text-slate-300 space-y-1.5">
+            <li>- Multiple speed & oscillation modes</li>
+            <li>- Long-lasting batteries on select models</li>
+            <li>- Built for hot nights and long outages</li>
+          </ul>
+        </article>
+
+        <!-- Stabilizers -->
+        <article class="glass-soft rounded-[1.4rem] border border-slate-800 p-5 flex flex-col gap-3">
+          <h2 class="font-heading text-lg font-semibold tracking-tight text-slate-50">
+            Voltage Stabilizers
+          </h2>
+          <p class="text-[0.85rem] text-slate-300">
+            Protect your appliances from voltage spikes, drops and inconsistent supply.
+          </p>
+          <ul class="mt-1 text-[0.8rem] text-slate-300 space-y-1.5">
+            <li>- Ranges for TVs, fridges and deep freezers</li>
+            <li>- Fast response and overload protection</li>
+            <li>- Ideal for unstable power areas</li>
+          </ul>
+        </article>
+
+        <!-- Kitchen / Others -->
+        <article class="glass-soft rounded-[1.4rem] border border-slate-800 p-5 flex flex-col gap-3">
+          <h2 class="font-heading text-lg font-semibold tracking-tight text-slate-50">
+            Everyday Essentials
+          </h2>
+          <p class="text-[0.85rem] text-slate-300">
+            A growing line of appliances built for long service life in real-world homes.
+          </p>
+          <ul class="mt-1 text-[0.8rem] text-slate-300 space-y-1.5">
+            <li>- BLDC energy-efficient fans (select markets)</li>
+            <li>- Power-conscious designs for shared power</li>
+            <li>- Aligns with QLINK inverters and solar kits</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <!-- Info / CTA -->
+      <div class="mt-10 glass-soft rounded-2xl border border-slate-800 p-6 sm:p-7 flex flex-col lg:flex-row gap-4 lg:gap-6 items-start lg:items-center justify-between">
+        <div>
+          <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1">
+            One ecosystem
+          </p>
+        <h2 class="font-heading text-lg sm:text-xl font-semibold tracking-tight text-slate-50">
+          Appliances that pair well with QLINK solar and inverters.
+        </h2>
+        <p class="mt-1 text-[0.85rem] text-slate-300 max-w-xl">
+          When your power, backup and appliances come from the same brand, it's easier to plan loads,
+          protect devices and keep everything running smoothly.
+        </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+          <a href="solar.html"
+             class="inline-flex flex-1 sm:flex-none items-center justify-center rounded-full bg-gradient-to-r from-brand-500 to-rose-500 px-5 py-2.5 text-[0.7rem] font-semibold tracking-[0.24em] uppercase">
+            View solar & inverters
+          </a>
+          <a href="dealers.html"
+             class="inline-flex flex-1 sm:flex-none items-center justify-center rounded-full border border-slate-600 bg-black/70 px-5 py-2.5 text-[0.7rem] font-semibold tracking-[0.24em] uppercase text-slate-200 hover:border-brand-500/70 hover:text-brand-100">
+            Find appliance dealer
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR BUNDLES -->
+  <section class="bg-black border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-6">
+        <div>
+          <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+            Popular bundles
+          </p>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-50">
+            Appliance sets designed to save power.
+          </h2>
+        </div>
+        <a href="contact.html"
+           class="inline-flex items-center text-[0.7rem] font-semibold tracking-[0.24em] uppercase text-brand-400 hover:text-brand-300">
+          Request pricing ->
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="glass-panel rounded-[1.5rem] border border-slate-800 p-5 space-y-3">
+          <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400">
+            Starter home
+          </p>
+          <h3 class="font-heading text-lg font-semibold text-slate-50">
+            TV + Fan + Stabilizer
+          </h3>
+          <p class="text-[0.85rem] text-slate-300">
+            Perfect for apartments and smaller homes with daily power fluctuations.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[0.7rem] text-slate-200">
+            <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">Low voltage ready</span>
+            <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">Energy saving</span>
+          </div>
+        </article>
+
+        <article class="glass-panel rounded-[1.5rem] border border-slate-800 p-5 space-y-3">
+          <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400">
+            Family comfort
+          </p>
+          <h3 class="font-heading text-lg font-semibold text-slate-50">
+            32-43" Smart TV + Fans
+          </h3>
+          <p class="text-[0.85rem] text-slate-300">
+            Balanced bundle for entertainment and airflow throughout the home.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[0.7rem] text-slate-200">
+            <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">Bluetooth audio</span>
+            <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">Inverter friendly</span>
+          </div>
+        </article>
+
+        <article class="glass-panel rounded-[1.5rem] border border-slate-800 p-5 space-y-3">
+          <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400">
+            Business pack
+          </p>
+          <h3 class="font-heading text-lg font-semibold text-slate-50">
+            TV + Stabilizer + Backup Fan
+          </h3>
+          <p class="text-[0.85rem] text-slate-300">
+            Built for offices, salons, and retail stores with long daily runtime.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[0.7rem] text-slate-200">
+            <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">Heavy-duty</span>
+            <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">Surge protection</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WARRANTY -->
+  <section class="bg-slate-950 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] gap-6 lg:gap-8">
+        <div>
+          <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+            Warranty & care
+          </p>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-50">
+            Support that keeps your appliances running.
+          </h2>
+          <p class="mt-2.5 text-[0.9rem] text-slate-300 max-w-xl">
+            Register your product with a dealer for warranty coverage, service support,
+            and access to genuine replacement parts.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+            <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+              Protection
+            </p>
+            <p class="font-heading text-lg font-semibold text-slate-50">
+              Surge & voltage
+            </p>
+            <p class="text-[0.8rem] text-slate-300 mt-1">
+              Stabilizers and regulators keep appliances safe.
+            </p>
+          </div>
+          <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+            <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+              Service
+            </p>
+            <p class="font-heading text-lg font-semibold text-slate-50">
+              Local support
+            </p>
+            <p class="text-[0.8rem] text-slate-300 mt-1">
+              Trained technicians across the dealer network.
+            </p>
+          </div>
+          <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+            <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+              Parts
+            </p>
+            <p class="font-heading text-lg font-semibold text-slate-50">
+              Genuine spares
+            </p>
+            <p class="text-[0.8rem] text-slate-300 mt-1">
+              Official components designed for QLINK devices.
+            </p>
+          </div>
+          <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+            <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+              Registration
+            </p>
+            <p class="font-heading text-lg font-semibold text-slate-50">
+              Easy sign-up
+            </p>
+            <p class="text-[0.8rem] text-slate-300 mt-1">
+              Register your serial number in minutes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('mobile-nav-toggle');
+      const menu = document.getElementById('mobile-menu');
+
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.add('hidden');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

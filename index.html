@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QLINK - Motorcycles, Solar & Home Appliances</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Rajdhani', 'system-ui', 'sans-serif'],
+            body: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              500: '#ef4444',
+              600: '#dc2626',
+            }
+          },
+          boxShadow: {
+            glass: '0 18px 55px rgba(0,0,0,0.65)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --nav-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #020617;
+      color: #e5e7eb;
+    }
+
+    img,
+    svg,
+    video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(248, 113, 113, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.16), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(239, 68, 68, 0.35), transparent 60%),
+        #020617;
+    }
+
+    .glass-panel {
+      background: linear-gradient(125deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.6));
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
+    }
+
+    .glass-soft {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.4));
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .bg-grid {
+      background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.2) 1px, transparent 0);
+      background-size: 30px 30px;
+    }
+
+    .nav-blur {
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+  </style>
+</head>
+<body class="min-h-full bg-slate-950 text-slate-50 overflow-x-hidden">
+  <!-- HEADER / NAV -->
+  <header class="fixed inset-x-0 top-0 z-40 border-b border-slate-800 bg-slate-950/90 nav-blur">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[var(--nav-height)] flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="h-8 w-8 rounded-2xl bg-slate-900 flex items-center justify-center border border-brand-600/70">
+          <span class="font-heading text-lg font-bold tracking-[0.18em]">Q</span>
+        </div>
+        <div class="flex flex-col leading-none">
+          <span class="font-heading text-base sm:text-lg font-semibold tracking-[0.3em] uppercase">
+            QLINK
+          </span>
+          <span class="text-[0.6rem] text-slate-400 tracking-[0.2em] uppercase">
+            Mobility & Power
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-7 text-[0.7rem] font-semibold tracking-[0.2em] uppercase">
+        <a href="index.html" class="text-slate-200 hover:text-brand-500">Home</a>
+        <a href="inventory.html" class="text-slate-300 hover:text-brand-500">Motorcycles</a>
+        <a href="solar.html" class="text-slate-300 hover:text-brand-500">Solar</a>
+        <a href="appliances.html" class="text-slate-300 hover:text-brand-500">Appliances</a>
+        <a href="news.html" class="text-slate-300 hover:text-brand-500">News</a>
+        <a href="dealers.html" class="text-slate-300 hover:text-brand-500">Dealers</a>
+        <a href="contact.html" class="text-slate-300 hover:text-brand-500">Contact</a>
+      </div>
+
+      <!-- Desktop CTA -->
+      <div class="hidden md:block">
+        <a href="dealers.html"
+           class="inline-flex items-center rounded-full bg-gradient-to-r from-brand-500 to-rose-500 px-5 py-2.5 text-[0.7rem] font-semibold tracking-[0.2em] uppercase shadow-glass">
+          Find Dealer
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-nav-toggle"
+              class="md:hidden inline-flex items-center justify-center rounded-full border border-slate-700 p-2 text-slate-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-800 bg-slate-950/95 nav-blur">
+      <div class="max-w-7xl mx-auto px-4 py-4 space-y-2 text-[0.78rem] font-semibold tracking-[0.22em] uppercase">
+        <a href="index.html" class="block text-slate-200">Home</a>
+        <a href="inventory.html" class="block text-slate-300">Motorcycles</a>
+        <a href="solar.html" class="block text-slate-300">Solar & Energy</a>
+        <a href="appliances.html" class="block text-slate-300">Home Appliances</a>
+        <a href="news.html" class="block text-slate-300">News</a>
+        <a href="dealers.html" class="block text-slate-300">Dealers</a>
+        <a href="contact.html" class="block text-slate-300">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-[var(--nav-height)]">
+    <!-- HERO -->
+    <section class="relative hero-bg overflow-hidden">
+      <div class="absolute inset-0 bg-grid opacity-30"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-10 lg:gap-14 py-10 sm:py-14 lg:py-20 items-center">
+          <!-- Hero Copy -->
+          <div class="space-y-7">
+            <div class="inline-flex items-center gap-2 rounded-full border border-brand-500/40 bg-brand-500/10 px-3 py-1.5">
+              <span class="h-1.5 w-1.5 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(248,113,113,0.9)]"></span>
+              <span class="text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-slate-100">
+                Motorcycles - Solar - Home Appliances
+              </span>
+            </div>
+
+            <div>
+              <h1 class="font-heading text-[2.1rem] sm:text-[2.6rem] lg:text-[3.1rem] font-semibold leading-[1.1] tracking-tight">
+                Built to move.
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-rose-400 to-sky-400">
+                  Built to power.
+                </span>
+                Built to last.
+              </h1>
+              <p class="mt-3 max-w-xl text-[0.9rem] sm:text-[0.95rem] text-slate-300 leading-relaxed">
+                QLINK delivers dependable motorcycles, solar systems and home appliances
+                designed for real African roads, power conditions, and everyday life.
+              </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <a href="inventory.html"
+                 class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-500 via-rose-500 to-orange-400 px-6 py-3 text-[0.7rem] font-semibold tracking-[0.24em] uppercase shadow-glass">
+                Explore Motorcycles
+              </a>
+              <a href="solar.html"
+                 class="inline-flex items-center justify-center rounded-full border border-slate-600 bg-black/70 px-6 py-3 text-[0.7rem] font-semibold tracking-[0.24em] uppercase text-slate-200 hover:border-brand-500/70 hover:text-brand-100">
+                Solar & Power Solutions
+              </a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-2">
+              <div class="glass-soft rounded-2xl px-3.5 py-3">
+                <div class="text-[0.6rem] font-semibold tracking-[0.24em] uppercase text-slate-400 mb-1.5">
+                  Dealers
+                </div>
+                <div class="font-heading text-xl sm:text-2xl font-semibold text-slate-50">
+                  200+
+                </div>
+                <p class="mt-1 text-[0.7rem] text-slate-400">
+                  Authorized across Africa.
+                </p>
+              </div>
+              <div class="glass-soft rounded-2xl px-3.5 py-3">
+                <div class="text-[0.6rem] font-semibold tracking-[0.24em] uppercase text-slate-400 mb-1.5">
+                  Fuel Economy
+                </div>
+                <div class="font-heading text-xl sm:text-2xl font-semibold text-brand-500">
+                  Up to 45 km/L
+                </div>
+                <p class="mt-1 text-[0.7rem] text-slate-400">
+                  Optimized for daily riders.
+                </p>
+              </div>
+              <div class="glass-soft rounded-2xl px-3.5 py-3">
+                <div class="text-[0.6rem] font-semibold tracking-[0.24em] uppercase text-slate-400 mb-1.5">
+                  Product Lines
+                </div>
+                <div class="font-heading text-xl sm:text-2xl font-semibold text-slate-50">
+                  3+
+                </div>
+                <p class="mt-1 text-[0.7rem] text-slate-400">
+                  Mobility, power, appliances.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Visual -->
+          <div class="relative mt-4 lg:mt-0">
+            <div class="absolute -inset-x-12 -top-10 -bottom-10 opacity-60 blur-3xl">
+              <div class="w-full h-full bg-gradient-to-br from-brand-500/35 via-transparent to-sky-500/40"></div>
+            </div>
+
+            <div class="glass-panel rounded-[1.7rem] overflow-hidden">
+              <div class="relative aspect-[4/3] sm:aspect-[4/2.7]">
+                <img
+                  src="https://images.unsplash.com/photo-1558980664-769d59546b3d?w=1600&auto=format&fit=crop&q=80"
+                  alt="QLINK Motorcycle"
+                  class="absolute inset-0 w-full h-full object-cover object-center" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/15 to-transparent"></div>
+
+                <div class="absolute left-3 sm:left-4 top-3 sm:top-4 rounded-full bg-slate-900/85 px-3 py-1.5 border border-slate-600/80 text-[0.6rem] font-semibold tracking-[0.22em] uppercase text-slate-100">
+                  XR Street Series
+                </div>
+
+                <div class="absolute inset-x-3 sm:inset-x-4 bottom-3 sm:bottom-4">
+                  <div class="glass-soft rounded-2xl px-3.5 py-3 sm:px-4 sm:py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <p class="text-[0.6rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+                        Featured Motorcycle
+                      </p>
+                      <p class="font-heading text-lg sm:text-xl font-semibold text-slate-50">
+                        XR150 - Urban Pro
+                      </p>
+                      <p class="text-[0.7rem] text-slate-300">
+                        150cc - 4-Stroke - 5-Speed - Disc Brake
+                      </p>
+                    </div>
+                    <a href="inventory.html"
+                       class="text-[0.7rem] font-semibold tracking-[0.24em] uppercase text-brand-500 hover:text-brand-600">
+                      View full lineup ->
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden lg:flex flex-col items-end gap-2.5 mt-4">
+              <div class="glass-soft rounded-full px-4 py-2 text-[0.68rem] font-semibold tracking-[0.24em] uppercase text-slate-300 flex items-center gap-2">
+                <span class="h-1.5 w-8 rounded-full bg-gradient-to-r from-brand-500 to-rose-400"></span>
+                Built for African roads
+              </div>
+              <div class="glass-soft rounded-full px-4 py-2 text-[0.68rem] font-semibold tracking-[0.24em] uppercase text-slate-300 flex items-center gap-2">
+                <span class="h-1.5 w-8 rounded-full bg-gradient-to-r from-sky-400 to-emerald-400"></span>
+                Shared dealer network for bikes & solar
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK PRODUCT STRIP -->
+    <section class="bg-slate-950 border-t border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <a href="inventory.html" class="glass-soft rounded-2xl p-4 sm:p-5 border border-slate-800 hover:border-brand-500/70 transition-colors">
+            <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+              Motorcycles
+            </p>
+            <p class="font-heading text-lg font-semibold text-slate-50">
+              Commuter, fleet & off-road bikes.
+            </p>
+            <p class="mt-1.5 text-[0.8rem] text-slate-300">
+              Fuel-efficient, parts available, ready for daily work.
+            </p>
+          </a>
+
+          <a href="solar.html" class="glass-soft rounded-2xl p-4 sm:p-5 border border-slate-800 hover:border-brand-500/70 transition-colors">
+            <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+              Solar & Energy
+            </p>
+            <p class="font-heading text-lg font-semibold text-slate-50">
+              Inverters, batteries & solar kits.
+            </p>
+            <p class="mt-1.5 text-[0.8rem] text-slate-300">
+              Designed for outages, low voltage and heavy usage.
+            </p>
+          </a>
+
+          <a href="appliances.html" class="glass-soft rounded-2xl p-4 sm:p-5 border border-slate-800 hover:border-brand-500/70 transition-colors">
+            <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+              Home Appliances
+            </p>
+            <p class="font-heading text-lg font-semibold text-slate-50">
+              TVs, fans, stabilizers & more.
+            </p>
+            <p class="mt-1.5 text-[0.8rem] text-slate-300">
+              Everyday appliances tuned for local power conditions.
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED MODELS -->
+    <section class="bg-slate-950 border-t border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-6">
+          <div>
+            <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+              Featured lineup
+            </p>
+            <h2 class="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-50">
+              Motorcycles that move your city.
+            </h2>
+          </div>
+          <a href="inventory.html"
+             class="inline-flex items-center text-[0.7rem] font-semibold tracking-[0.24em] uppercase text-brand-400 hover:text-brand-300">
+            View full lineup ->
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-7">
+          <article class="glass-panel rounded-[1.5rem] overflow-hidden border border-slate-800">
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1515777315835-281b94c9589e?w=1200&auto=format&fit=crop&q=80"
+                alt="Street commuter motorcycle"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent"></div>
+              <span class="absolute left-3 top-3 rounded-full bg-brand-500/80 px-3 py-1 text-[0.6rem] font-semibold tracking-[0.22em] uppercase text-white">
+                City commuter
+              </span>
+            </div>
+            <div class="p-5 space-y-3">
+              <h3 class="font-heading text-xl font-semibold tracking-tight text-slate-50">
+                XR150 Street
+              </h3>
+              <p class="text-[0.85rem] text-slate-300">
+                Lightweight frame, easy servicing, and daily-rider fuel savings.
+              </p>
+              <div class="flex flex-wrap gap-2 text-[0.7rem] text-slate-200">
+                <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">150cc</span>
+                <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">4-Stroke</span>
+                <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">5-Speed</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-panel rounded-[1.5rem] overflow-hidden border border-slate-800">
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1487338875411-8881f8e42f46?w=1200&auto=format&fit=crop&q=80"
+                alt="Sport motorcycle"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent"></div>
+              <span class="absolute left-3 top-3 rounded-full bg-sky-500/80 px-3 py-1 text-[0.6rem] font-semibold tracking-[0.22em] uppercase text-white">
+                Sport tuned
+              </span>
+            </div>
+            <div class="p-5 space-y-3">
+              <h3 class="font-heading text-xl font-semibold tracking-tight text-slate-50">
+                XR200 Sport
+              </h3>
+              <p class="text-[0.85rem] text-slate-300">
+                Torque-focused power delivery with upgraded braking control.
+              </p>
+              <div class="flex flex-wrap gap-2 text-[0.7rem] text-slate-200">
+                <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">200cc</span>
+                <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">6-Speed</span>
+                <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">Disc Brakes</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-panel rounded-[1.5rem] overflow-hidden border border-slate-800">
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop&q=80"
+                alt="Off-road motorcycle"
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent"></div>
+              <span class="absolute left-3 top-3 rounded-full bg-emerald-500/80 px-3 py-1 text-[0.6rem] font-semibold tracking-[0.22em] uppercase text-white">
+                Adventure ready
+              </span>
+            </div>
+            <div class="p-5 space-y-3">
+              <h3 class="font-heading text-xl font-semibold tracking-tight text-slate-50">
+                XT250 Adventure
+              </h3>
+              <p class="text-[0.85rem] text-slate-300">
+                Long-travel suspension with reinforced chassis for mixed terrain.
+              </p>
+              <div class="flex flex-wrap gap-2 text-[0.7rem] text-slate-200">
+                <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">250cc</span>
+                <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">Dual-purpose</span>
+                <span class="rounded-full border border-slate-700 bg-black/60 px-3 py-1">High torque</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIGHLIGHT: WHY QLINK -->
+    <section class="bg-slate-950 py-12 sm:py-16 lg:py-18 border-t border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+            Why QLINK
+          </p>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold tracking-tight">
+            One brand for
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-sky-400">
+              movement & power.
+            </span>
+          </h2>
+          <p class="mt-2.5 text-[0.85rem] sm:text-sm text-slate-300">
+            Motorcycles for work and mobility, solar systems for light and power,
+            appliances for everyday comfort — all supported by one dealer network.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+          <div class="glass-soft rounded-2xl p-5 border border-slate-800">
+            <h3 class="font-heading text-lg font-semibold text-slate-50 mb-1">
+              Built for uptime.
+            </h3>
+            <p class="text-[0.85rem] text-slate-300">
+              Products tuned for rough roads, weak power, and heavy daily use.
+            </p>
+          </div>
+          <div class="glass-soft rounded-2xl p-5 border border-slate-800">
+            <h3 class="font-heading text-lg font-semibold text-slate-50 mb-1">
+              Shared parts & service.
+            </h3>
+            <p class="text-[0.85rem] text-slate-300">
+              One network of dealers and technicians for bikes, solar and appliances.
+            </p>
+          </div>
+          <div class="glass-soft rounded-2xl p-5 border border-slate-800">
+            <h3 class="font-heading text-lg font-semibold text-slate-50 mb-1">
+              Fleet & business ready.
+            </h3>
+            <p class="text-[0.85rem] text-slate-300">
+              Supporting delivery fleets, SMEs, and commercial users across cities.
+            </p>
+          </div>
+          <div class="glass-soft rounded-2xl p-5 border border-slate-800">
+            <h3 class="font-heading text-lg font-semibold text-slate-50 mb-1">
+              Designed for Africa.
+            </h3>
+            <p class="text-[0.85rem] text-slate-300">
+              Real-world testing in African conditions, roads and power systems.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OWNERSHIP EXPERIENCE -->
+    <section class="bg-black border-t border-slate-900 py-10 sm:py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-6 lg:gap-8">
+          <div>
+            <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+              Ownership experience
+            </p>
+            <h2 class="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-50">
+              Backed by service, parts, and local support.
+            </h2>
+            <p class="mt-2.5 text-[0.9rem] text-slate-300 max-w-xl">
+              Every QLINK purchase comes with practical support for riders and business owners.
+              Keep your bike and power systems running with trusted dealer help.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-3 text-[0.75rem] font-semibold tracking-[0.24em] uppercase">
+              <span class="rounded-full border border-slate-700 bg-black/70 px-4 py-2 text-slate-200">
+                Warranty support
+              </span>
+              <span class="rounded-full border border-slate-700 bg-black/70 px-4 py-2 text-slate-200">
+                Genuine parts
+              </span>
+              <span class="rounded-full border border-slate-700 bg-black/70 px-4 py-2 text-slate-200">
+                Fleet programs
+              </span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+              <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+                Service coverage
+              </p>
+              <p class="font-heading text-xl font-semibold text-slate-50">
+                200+ centers
+              </p>
+              <p class="text-[0.8rem] text-slate-300 mt-1">
+                Authorized technicians for motorcycles and solar gear.
+              </p>
+            </div>
+            <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+              <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+                Parts access
+              </p>
+              <p class="font-heading text-xl font-semibold text-slate-50">
+                48-hour supply
+              </p>
+              <p class="text-[0.8rem] text-slate-300 mt-1">
+                Fast-moving spares stocked by regional hubs.
+              </p>
+            </div>
+            <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+              <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+                Financing
+              </p>
+              <p class="font-heading text-xl font-semibold text-slate-50">
+                Flexible terms
+              </p>
+              <p class="text-[0.8rem] text-slate-300 mt-1">
+                Partnered options for fleet and delivery riders.
+              </p>
+            </div>
+            <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+              <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+                Training
+              </p>
+              <p class="font-heading text-xl font-semibold text-slate-50">
+                Dealer academy
+              </p>
+              <p class="text-[0.8rem] text-slate-300 mt-1">
+                Certified service for riders and technicians.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA STRIP -->
+    <section class="bg-black border-t border-slate-900 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-5">
+        <div>
+          <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+            Ready to experience QLINK?
+          </p>
+          <h3 class="font-heading text-xl sm:text-2xl font-semibold tracking-tight text-slate-50">
+            Visit a showroom or talk to our team.
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="dealers.html"
+             class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-500 via-rose-500 to-orange-400 px-6 py-3 text-[0.7rem] font-semibold tracking-[0.24em] uppercase">
+            Find a dealer
+          </a>
+          <a href="contact.html"
+             class="inline-flex items-center justify-center rounded-full border border-slate-600 bg-black/70 px-6 py-3 text-[0.7rem] font-semibold tracking-[0.24em] uppercase text-slate-200 hover:border-brand-500/70 hover:text-brand-100">
+            Contact QLINK
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-t border-slate-900 py-7">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-heading text-base sm:text-lg font-semibold tracking-[0.32em] uppercase">
+            QLINK
+          </span>
+          <span class="h-1 w-10 rounded-full bg-gradient-to-r from-brand-500 via-rose-400 to-sky-400"></span>
+        </div>
+        <p class="mt-1 text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
+          Motorcycles - Solar - Appliances
+        </p>
+      </div>
+      <p class="text-[0.7rem] text-slate-500 tracking-[0.22em] uppercase">
+        (c) 2024 QLINK. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- MOBILE NAV JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('mobile-nav-toggle');
+      const menu = document.getElementById('mobile-menu');
+
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+
+      // Close on link click
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.add('hidden');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

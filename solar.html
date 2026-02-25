@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QLINK - Motorcycles, Solar & Home Appliances</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Rajdhani', 'system-ui', 'sans-serif'],
+            body: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              500: '#ef4444',
+              600: '#dc2626',
+            }
+          },
+          boxShadow: {
+            glass: '0 18px 55px rgba(0,0,0,0.65)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --nav-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #020617;
+      color: #e5e7eb;
+    }
+
+    img,
+    svg,
+    video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(248, 113, 113, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.16), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(239, 68, 68, 0.35), transparent 60%),
+        #020617;
+    }
+
+    .glass-panel {
+      background: linear-gradient(125deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.6));
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
+    }
+
+    .glass-soft {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.4));
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .bg-grid {
+      background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.2) 1px, transparent 0);
+      background-size: 30px 30px;
+    }
+
+    .nav-blur {
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+  </style>
+</head>
+<body class="min-h-full bg-slate-950 text-slate-50 overflow-x-hidden">
+  <!-- HEADER / NAV -->
+  <header class="fixed inset-x-0 top-0 z-40 border-b border-slate-800 bg-slate-950/90 nav-blur">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[var(--nav-height)] flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="h-8 w-8 rounded-2xl bg-slate-900 flex items-center justify-center border border-brand-600/70">
+          <span class="font-heading text-lg font-bold tracking-[0.18em]">Q</span>
+        </div>
+        <div class="flex flex-col leading-none">
+          <span class="font-heading text-base sm:text-lg font-semibold tracking-[0.3em] uppercase">
+            QLINK
+          </span>
+          <span class="text-[0.6rem] text-slate-400 tracking-[0.2em] uppercase">
+            Mobility & Power
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-7 text-[0.7rem] font-semibold tracking-[0.2em] uppercase">
+        <a href="index.html" class="text-slate-200 hover:text-brand-500">Home</a>
+        <a href="inventory.html" class="text-slate-300 hover:text-brand-500">Motorcycles</a>
+        <a href="solar.html" class="text-slate-300 hover:text-brand-500">Solar</a>
+        <a href="appliances.html" class="text-slate-300 hover:text-brand-500">Appliances</a>
+        <a href="news.html" class="text-slate-300 hover:text-brand-500">News</a>
+        <a href="dealers.html" class="text-slate-300 hover:text-brand-500">Dealers</a>
+        <a href="contact.html" class="text-slate-300 hover:text-brand-500">Contact</a>
+      </div>
+
+      <!-- Desktop CTA -->
+      <div class="hidden md:block">
+        <a href="dealers.html"
+           class="inline-flex items-center rounded-full bg-gradient-to-r from-brand-500 to-rose-500 px-5 py-2.5 text-[0.7rem] font-semibold tracking-[0.2em] uppercase shadow-glass">
+          Find Dealer
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-nav-toggle"
+              class="md:hidden inline-flex items-center justify-center rounded-full border border-slate-700 p-2 text-slate-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-800 bg-slate-950/95 nav-blur">
+      <div class="max-w-7xl mx-auto px-4 py-4 space-y-2 text-[0.78rem] font-semibold tracking-[0.22em] uppercase">
+        <a href="index.html" class="block text-slate-200">Home</a>
+        <a href="inventory.html" class="block text-slate-300">Motorcycles</a>
+        <a href="solar.html" class="block text-slate-300">Solar & Energy</a>
+        <a href="appliances.html" class="block text-slate-300">Home Appliances</a>
+        <a href="news.html" class="block text-slate-300">News</a>
+        <a href="dealers.html" class="block text-slate-300">Dealers</a>
+        <a href="contact.html" class="block text-slate-300">Contact</a>
+      </div>
+    </div>
+  </header>
+<main class="pt-[var(--nav-height)] bg-black">
+  <section class="hero-bg border-b border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div class="max-w-3xl">
+        <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-2">
+          Solar & Energy
+        </p>
+        <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-50">
+          Solar, inverters & batteries
+          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-sky-400">
+            built for real outages.
+          </span>
+        </h1>
+        <p class="mt-3 text-[0.9rem] text-slate-300 max-w-xl">
+          Systems made for Nigerian and African power issues: low voltage, frequent blackouts,
+          and long runtimes on backup power.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-6 lg:gap-8">
+        <!-- Product Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-7">
+          <article class="glass-panel rounded-[1.5rem] border border-slate-800 p-5 sm:p-6 flex flex-col gap-3">
+            <div class="relative rounded-xl overflow-hidden aspect-[4/3] sm:aspect-[4/2.7] mb-3">
+              <img
+                src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=1200&auto=format&fit=crop&q=80"
+                alt="Hybrid inverter"
+                class="absolute inset-0 w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent"></div>
+              <div class="absolute left-3 top-3 rounded-full bg-black/80 border border-slate-600 px-3 py-1 text-[0.6rem] font-semibold tracking-[0.22em] uppercase text-slate-100">
+                PowerHub Hybrid
+              </div>
+            </div>
+            <h2 class="font-heading text-lg sm:text-xl font-semibold tracking-tight text-slate-50">
+              QL PowerHub Inverters
+            </h2>
+            <p class="text-[0.85rem] text-slate-300">
+              Hybrid inverters designed for homes and small businesses - pure sine wave,
+              fast changeover and protection for sensitive electronics.
+            </p>
+            <ul class="mt-2 text-[0.8rem] text-slate-300 space-y-1.5">
+              <li>- Capacities from 1.5kVA to 5kVA</li>
+              <li>- Works with grid, battery and solar</li>
+              <li>- Intelligent switching during outages</li>
+            </ul>
+          </article>
+
+          <article class="glass-panel rounded-[1.5rem] border border-slate-800 p-5 sm:p-6 flex flex-col gap-3">
+            <div class="relative rounded-xl overflow-hidden aspect-[4/3] sm:aspect-[4/2.7] mb-3">
+              <img
+                src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?w=1200&auto=format&fit=crop&q=80"
+                alt="Solar panel system"
+                class="absolute inset-0 w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent"></div>
+              <div class="absolute left-3 top-3 rounded-full bg-black/80 border border-slate-600 px-3 py-1 text-[0.6rem] font-semibold tracking-[0.22em] uppercase text-slate-100">
+                Off-grid kits
+              </div>
+            </div>
+            <h2 class="font-heading text-lg sm:text-xl font-semibold tracking-tight text-slate-50">
+              Solar Backup Kits
+            </h2>
+            <p class="text-[0.85rem] text-slate-300">
+              Pre-configured solar systems for homes, shops and small offices with matched panels,
+              controllers and battery banks.
+            </p>
+            <ul class="mt-2 text-[0.8rem] text-slate-300 space-y-1.5">
+              <li>- Designed for fans, lights, TVs and small fridges</li>
+              <li>- Scalable as your needs grow</li>
+              <li>- Installer-friendly documentation</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Info / CTA -->
+        <div class="glass-soft rounded-[1.6rem] border border-slate-800 p-6 sm:p-7 flex flex-col gap-4">
+          <h2 class="font-heading text-xl sm:text-2xl font-semibold tracking-tight text-slate-50">
+            Power that keeps up with your life.
+          </h2>
+          <p class="text-[0.9rem] text-slate-300">
+            Our energy products consider the reality of power cuts, generator noise and rising fuel costs.
+            QLINK solar and inverter lines are built to reduce running costs and keep essential loads on.
+          </p>
+          <ul class="mt-1 text-[0.85rem] text-slate-300 space-y-1.5">
+            <li>- Tuned for common voltage issues and brownouts.</li>
+            <li>- Shared dealer network with motorcycles and appliances.</li>
+            <li>- Technical support and documentation for installers.</li>
+          </ul>
+          <div class="pt-2 flex flex-col sm:flex-row gap-3">
+            <a href="dealers.html"
+               class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-500 to-rose-500 px-5 py-2.5 text-[0.7rem] font-semibold tracking-[0.24em] uppercase">
+              Find energy dealer
+            </a>
+            <a href="contact.html"
+               class="inline-flex items-center justify-center rounded-full border border-slate-600 bg-black/70 px-5 py-2.5 text-[0.7rem] font-semibold tracking-[0.24em] uppercase text-slate-200 hover:border-brand-500/70 hover:text-brand-100">
+              Request a quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEM SIZING -->
+  <section class="bg-slate-950 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] gap-6 lg:gap-8">
+        <div>
+          <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+            System sizing
+          </p>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-50">
+            Estimate the backup you need.
+          </h2>
+          <p class="mt-2.5 text-[0.9rem] text-slate-300 max-w-xl">
+            Use this quick slider to start a conversation with our energy team. We'll help you
+            calculate the right inverter and battery set for your daily loads.
+          </p>
+        </div>
+        <div class="glass-panel rounded-[1.6rem] border border-slate-800 p-6 sm:p-7">
+          <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-3">
+            Estimated daily usage
+          </p>
+          <input type="range" min="1" max="10" value="4"
+                 class="w-full accent-rose-500">
+          <div class="mt-3 flex items-center justify-between text-[0.75rem] text-slate-400 uppercase tracking-[0.22em]">
+            <span>Light use</span>
+            <span>Medium</span>
+            <span>Heavy use</span>
+          </div>
+          <div class="mt-5 grid grid-cols-2 gap-4">
+            <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+              <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+                Suggested inverter
+              </p>
+              <p class="font-heading text-lg font-semibold text-slate-50">
+                2.5kVA
+              </p>
+              <p class="text-[0.75rem] text-slate-300 mt-1">
+                Pure sine wave, hybrid ready.
+              </p>
+            </div>
+            <div class="glass-soft rounded-2xl border border-slate-800 p-4">
+              <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-1.5">
+                Suggested batteries
+              </p>
+              <p class="font-heading text-lg font-semibold text-slate-50">
+                2 x 200Ah
+              </p>
+              <p class="text-[0.75rem] text-slate-300 mt-1">
+                Optimized for 6-8 hour backup.
+              </p>
+            </div>
+          </div>
+          <a href="contact.html"
+             class="mt-5 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-500 to-rose-500 px-5 py-2.5 text-[0.7rem] font-semibold tracking-[0.24em] uppercase">
+            Request a sizing call
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALLATION PROCESS -->
+  <section class="bg-black border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+          Installation process
+        </p>
+        <h2 class="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-50">
+          From assessment to power-on in days.
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="glass-soft rounded-2xl border border-slate-800 p-5">
+          <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-2">
+            Step 1
+          </p>
+          <h3 class="font-heading text-lg font-semibold text-slate-50">
+            Load audit
+          </h3>
+          <p class="text-[0.85rem] text-slate-300 mt-1">
+            We assess your home or business loads and runtime needs.
+          </p>
+        </div>
+        <div class="glass-soft rounded-2xl border border-slate-800 p-5">
+          <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-2">
+            Step 2
+          </p>
+          <h3 class="font-heading text-lg font-semibold text-slate-50">
+            System design
+          </h3>
+          <p class="text-[0.85rem] text-slate-300 mt-1">
+            We match inverter, battery, and panel specs to your goals.
+          </p>
+        </div>
+        <div class="glass-soft rounded-2xl border border-slate-800 p-5">
+          <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-2">
+            Step 3
+          </p>
+          <h3 class="font-heading text-lg font-semibold text-slate-50">
+            Install & train
+          </h3>
+          <p class="text-[0.85rem] text-slate-300 mt-1">
+            Certified teams install and guide you through maintenance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('mobile-nav-toggle');
+      const menu = document.getElementById('mobile-menu');
+
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.add('hidden');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

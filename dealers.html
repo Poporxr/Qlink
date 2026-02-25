@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QLINK - Motorcycles, Solar & Home Appliances</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Rajdhani', 'system-ui', 'sans-serif'],
+            body: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              500: '#ef4444',
+              600: '#dc2626',
+            }
+          },
+          boxShadow: {
+            glass: '0 18px 55px rgba(0,0,0,0.65)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --nav-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #020617;
+      color: #e5e7eb;
+    }
+
+    img,
+    svg,
+    video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(248, 113, 113, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.16), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(239, 68, 68, 0.35), transparent 60%),
+        #020617;
+    }
+
+    .glass-panel {
+      background: linear-gradient(125deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.6));
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
+    }
+
+    .glass-soft {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.4));
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .bg-grid {
+      background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.2) 1px, transparent 0);
+      background-size: 30px 30px;
+    }
+
+    .nav-blur {
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+  </style>
+</head>
+<body class="min-h-full bg-slate-950 text-slate-50 overflow-x-hidden">
+  <!-- HEADER / NAV -->
+  <header class="fixed inset-x-0 top-0 z-40 border-b border-slate-800 bg-slate-950/90 nav-blur">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[var(--nav-height)] flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="h-8 w-8 rounded-2xl bg-slate-900 flex items-center justify-center border border-brand-600/70">
+          <span class="font-heading text-lg font-bold tracking-[0.18em]">Q</span>
+        </div>
+        <div class="flex flex-col leading-none">
+          <span class="font-heading text-base sm:text-lg font-semibold tracking-[0.3em] uppercase">
+            QLINK
+          </span>
+          <span class="text-[0.6rem] text-slate-400 tracking-[0.2em] uppercase">
+            Mobility & Power
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-7 text-[0.7rem] font-semibold tracking-[0.2em] uppercase">
+        <a href="index.html" class="text-slate-200 hover:text-brand-500">Home</a>
+        <a href="inventory.html" class="text-slate-300 hover:text-brand-500">Motorcycles</a>
+        <a href="solar.html" class="text-slate-300 hover:text-brand-500">Solar</a>
+        <a href="appliances.html" class="text-slate-300 hover:text-brand-500">Appliances</a>
+        <a href="news.html" class="text-slate-300 hover:text-brand-500">News</a>
+        <a href="dealers.html" class="text-slate-300 hover:text-brand-500">Dealers</a>
+        <a href="contact.html" class="text-slate-300 hover:text-brand-500">Contact</a>
+      </div>
+
+      <!-- Desktop CTA -->
+      <div class="hidden md:block">
+        <a href="dealers.html"
+           class="inline-flex items-center rounded-full bg-gradient-to-r from-brand-500 to-rose-500 px-5 py-2.5 text-[0.7rem] font-semibold tracking-[0.2em] uppercase shadow-glass">
+          Find Dealer
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-nav-toggle"
+              class="md:hidden inline-flex items-center justify-center rounded-full border border-slate-700 p-2 text-slate-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-800 bg-slate-950/95 nav-blur">
+      <div class="max-w-7xl mx-auto px-4 py-4 space-y-2 text-[0.78rem] font-semibold tracking-[0.22em] uppercase">
+        <a href="index.html" class="block text-slate-200">Home</a>
+        <a href="inventory.html" class="block text-slate-300">Motorcycles</a>
+        <a href="solar.html" class="block text-slate-300">Solar & Energy</a>
+        <a href="appliances.html" class="block text-slate-300">Home Appliances</a>
+        <a href="news.html" class="block text-slate-300">News</a>
+        <a href="dealers.html" class="block text-slate-300">Dealers</a>
+        <a href="contact.html" class="block text-slate-300">Contact</a>
+      </div>
+    </div>
+  </header>
+<main class="pt-[var(--nav-height)] bg-slate-950">
+  <!-- Hero -->
+  <section class="hero-bg border-b border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div class="max-w-3xl">
+        <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-2">
+          Dealer Network
+        </p>
+        <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-50">
+          Find an authorized QLINK dealer near you.
+        </h1>
+        <p class="mt-3 text-[0.9rem] text-slate-300 max-w-xl">
+          Showrooms and service centers for motorcycles, solar and home appliances - all in one network.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search + Map -->
+  <section class="bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-6 lg:gap-8">
+
+        <!-- Left: Search & Dealer Cards -->
+        <div class="space-y-5">
+          <!-- Search Bar -->
+          <div class="glass-soft rounded-2xl border border-slate-800 p-4 sm:p-5">
+            <div class="flex flex-col sm:flex-row gap-3">
+              <div class="flex-1">
+                <label class="block text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-slate-400 mb-1">
+                  City or Region
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Lagos, Nairobi, Accra"
+                  class="w-full rounded-xl border border-slate-700 bg-black/70 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-500" />
+              </div>
+              <div class="sm:w-44">
+                <label class="block text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-slate-400 mb-1">
+                  Focus
+                </label>
+                <select class="w-full rounded-xl border border-slate-700 bg-black/70 px-3 py-2.5 text-xs text-slate-100">
+                  <option>All services</option>
+                  <option>Motorcycles</option>
+                  <option>Solar & inverters</option>
+                  <option>Appliances</option>
+                  <option>Service / repairs</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-3 flex flex-wrap gap-2 text-[0.65rem] font-semibold tracking-[0.22em] uppercase">
+              <button class="rounded-full bg-brand-500 text-white px-3 py-1">
+                Sales
+              </button>
+              <button class="rounded-full border border-slate-600 bg-black/70 text-slate-200 px-3 py-1">
+                Service
+              </button>
+              <button class="rounded-full border border-slate-600 bg-black/70 text-slate-200 px-3 py-1">
+                Spare parts
+              </button>
+            </div>
+          </div>
+
+          <!-- Dealer List -->
+          <div class="space-y-4">
+
+            <!-- Dealer 1 -->
+            <article class="glass-soft rounded-2xl border border-slate-800 p-4 sm:p-5">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h2 class="font-heading text-lg font-semibold tracking-tight text-slate-50">
+                    QLINK Victoria Island Showroom
+                  </h2>
+                  <p class="mt-1 text-[0.75rem] uppercase tracking-[0.22em] text-slate-400">
+                    Lagos, Nigeria - Motorcycles - Solar - Appliances
+                  </p>
+                </div>
+                <span class="rounded-full bg-emerald-500/15 border border-emerald-500/60 px-3 py-1 text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-emerald-300">
+                  Open
+                </span>
+              </div>
+              <p class="mt-2 text-[0.85rem] text-slate-300">
+                Major QLINK experience center with demo bikes, solar displays and appliance showroom.
+              </p>
+              <p class="mt-2 text-[0.8rem] text-slate-300">
+                Tel: <span class="font-semibold text-slate-100">+234 800 000 0000</span>
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2 text-[0.65rem] font-semibold tracking-[0.22em] uppercase">
+                <span class="rounded-full bg-brand-500/15 border border-brand-500/60 px-3 py-1 text-brand-300">
+                  Motorcycles
+                </span>
+                <span class="rounded-full bg-sky-500/15 border border-sky-500/60 px-3 py-1 text-sky-300">
+                  Solar & Energy
+                </span>
+                <span class="rounded-full bg-amber-500/15 border border-amber-500/60 px-3 py-1 text-amber-300">
+                  Appliances
+                </span>
+              </div>
+            </article>
+
+            <!-- Dealer 2 -->
+            <article class="glass-soft rounded-2xl border border-slate-800 p-4 sm:p-5">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h2 class="font-heading text-lg font-semibold tracking-tight text-slate-50">
+                    QLINK Industrial Service Hub
+                  </h2>
+                  <p class="mt-1 text-[0.75rem] uppercase tracking-[0.22em] text-slate-400">
+                    Nairobi, Kenya - Service - Spare parts
+                  </p>
+                </div>
+                <span class="rounded-full bg-slate-900 border border-slate-700 px-3 py-1 text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-slate-300">
+                  Closes 6pm
+                </span>
+              </div>
+              <p class="mt-2 text-[0.85rem] text-slate-300">
+                Heavy-duty workshop with diagnostics, engine rebuilds and official QLINK spare parts.
+              </p>
+              <p class="mt-2 text-[0.8rem] text-slate-300">
+                Tel: <span class="font-semibold text-slate-100">+254 700 123 456</span>
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2 text-[0.65rem] font-semibold tracking-[0.22em] uppercase">
+                <span class="rounded-full bg-emerald-500/15 border border-emerald-500/60 px-3 py-1 text-emerald-300">
+                  Service
+                </span>
+                <span class="rounded-full bg-slate-500/15 border border-slate-500/60 px-3 py-1 text-slate-200">
+                  Spare parts
+                </span>
+              </div>
+            </article>
+
+            <!-- Dealer 3 -->
+            <article class="glass-soft rounded-2xl border border-slate-800 p-4 sm:p-5">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h2 class="font-heading text-lg font-semibold tracking-tight text-slate-50">
+                    QLINK City Center Outlet
+                  </h2>
+                  <p class="mt-1 text-[0.75rem] uppercase tracking-[0.22em] text-slate-400">
+                    Accra, Ghana - Motorcycles - Appliances
+                  </p>
+                </div>
+                <span class="rounded-full bg-rose-500/15 border border-rose-500/60 px-3 py-1 text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-rose-300">
+                  New
+                </span>
+              </div>
+              <p class="mt-2 text-[0.85rem] text-slate-300">
+                Compact outlet for commuters and home users looking for reliable bikes and appliances.
+              </p>
+              <p class="mt-2 text-[0.8rem] text-slate-300">
+                Tel: <span class="font-semibold text-slate-100">+233 555 000 000</span>
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2 text-[0.65rem] font-semibold tracking-[0.22em] uppercase">
+                <span class="rounded-full bg-brand-500/15 border border-brand-500/60 px-3 py-1 text-brand-300">
+                  Motorcycles
+                </span>
+                <span class="rounded-full bg-amber-500/15 border border-amber-500/60 px-3 py-1 text-amber-300">
+                  Appliances
+                </span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Right: Map Placeholder -->
+        <div class="glass-panel rounded-[1.6rem] border border-slate-800 p-5 sm:p-6 flex flex-col justify-between">
+          <div>
+            <h2 class="font-heading text-lg sm:text-xl font-semibold tracking-tight text-slate-50 mb-2">
+              Map view (for later integration)
+            </h2>
+            <p class="text-[0.85rem] text-slate-300 mb-4">
+              This area is reserved for an interactive map (Google Maps, Mapbox, etc.) showing QLINK
+              dealers by city and product line.
+            </p>
+          </div>
+          <div class="mt-2 flex-1 rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-950 to-black flex items-center justify-center text-center">
+            <div>
+              <p class="text-[0.8rem] font-semibold tracking-[0.22em] uppercase text-slate-400">
+                Map integration placeholder
+              </p>
+              <p class="mt-1 text-[0.8rem] text-slate-500">
+                Replace with real map component in React / Next.js.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DEALER TIERS -->
+  <section class="bg-black border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+          Dealer tiers
+        </p>
+        <h2 class="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-50">
+          Find the right level of support.
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-soft rounded-2xl border border-slate-800 p-5">
+          <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-2">
+            Showroom
+          </p>
+          <h3 class="font-heading text-lg font-semibold text-slate-50">
+            Product experience
+          </h3>
+          <p class="text-[0.85rem] text-slate-300 mt-1">
+            Demo bikes, appliance displays, and solar consultations.
+          </p>
+        </div>
+        <div class="glass-soft rounded-2xl border border-slate-800 p-5">
+          <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-2">
+            Service hub
+          </p>
+          <h3 class="font-heading text-lg font-semibold text-slate-50">
+            Repairs & diagnostics
+          </h3>
+          <p class="text-[0.85rem] text-slate-300 mt-1">
+            Certified technicians for bikes, solar, and appliances.
+          </p>
+        </div>
+        <div class="glass-soft rounded-2xl border border-slate-800 p-5">
+          <p class="text-[0.65rem] uppercase tracking-[0.22em] text-slate-400 mb-2">
+            Fleet partner
+          </p>
+          <h3 class="font-heading text-lg font-semibold text-slate-50">
+            Business support
+          </h3>
+          <p class="text-[0.85rem] text-slate-300 mt-1">
+            Dedicated stock, service SLAs, and parts planning.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEALER FAQ -->
+  <section class="bg-slate-950 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="flex flex-col lg:flex-row items-start justify-between gap-6">
+        <div class="max-w-xl">
+          <p class="text-[0.7rem] uppercase tracking-[0.24em] text-slate-400 mb-1.5">
+            Dealer FAQ
+          </p>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-50">
+            Quick answers before you visit.
+          </h2>
+          <p class="mt-2.5 text-[0.9rem] text-slate-300">
+            Get details on service scheduling, spare parts availability, and financing.
+          </p>
+        </div>
+        <div class="w-full lg:max-w-xl space-y-3">
+          <details class="glass-soft rounded-2xl border border-slate-800 p-4">
+            <summary class="cursor-pointer text-[0.85rem] font-semibold text-slate-100">
+              Do I need an appointment for service?
+            </summary>
+            <p class="mt-2 text-[0.85rem] text-slate-300">
+              Most service hubs accept walk-ins, but appointments reduce wait times.
+            </p>
+          </details>
+          <details class="glass-soft rounded-2xl border border-slate-800 p-4">
+            <summary class="cursor-pointer text-[0.85rem] font-semibold text-slate-100">
+              Are genuine spare parts stocked locally?
+            </summary>
+            <p class="mt-2 text-[0.85rem] text-slate-300">
+              Top-moving parts are stocked locally, with regional hubs for fast resupply.
+            </p>
+          </details>
+          <details class="glass-soft rounded-2xl border border-slate-800 p-4">
+            <summary class="cursor-pointer text-[0.85rem] font-semibold text-slate-100">
+              Can I buy solar products at a motorcycle dealer?
+            </summary>
+            <p class="mt-2 text-[0.85rem] text-slate-300">
+              Many dealers offer multi-product sales. Use the filter above to confirm.
+            </p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('mobile-nav-toggle');
+      const menu = document.getElementById('mobile-menu');
+
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.add('hidden');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
